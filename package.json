@@ -16,7 +16,6 @@
     "test:linux": "vitest --coverage $npm_package_config_path",
     "test:win": "vitest --coverage %npm_package_config_path%",
     "test:storybook": "vitest --project=storybook",
-    "sonar": "sonar-scanner",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -44,14 +43,12 @@
     "nuxt": "^3.14.1592",
     "playwright": "^1.49.1",
     "puppeteer": "^23.7.1",
-    "sonarqube-scanner": "^4.2.6",
     "storybook": "^8.4.7",
     "typescript": "^5.7.2",
     "unplugin-auto-import": "^0.19.0",
     "unplugin-vue-components": "^0.27.5",
     "vee-validate": "^4.14.7",
     "vitest": "^2.1.8",
-    "vitest-sonar-reporter": "^2.0.0",
     "vue": "^3.5.13",
     "vue-tsc": "^2.1.10"
   },
