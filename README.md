@@ -7,27 +7,25 @@
   <img src="https://img.shields.io/badge/-Vitest-FF8800.svg?logo=vitest&style=flat">
   <img src="https://img.shields.io/badge/-Storybook-grey.svg?logo=storybook&style=flat">
   <img src="https://img.shields.io/badge/-Puppeteer-lightyellow.svg?logo=puppeteer&style=flat">
-  <img src="https://img.shields.io/badge/-SonarQube-white.svg?logo=sonarqube&style=flat">
   <img src="https://img.shields.io/badge/-Windows-0078D6.svg?logo=windows&style=flat">
   <img src="https://img.shields.io/badge/-Mac-grey.svg?logo=macos&style=flat">
   <img src="https://img.shields.io/badge/-Linux-black.svg?logo=linux&style=flat">
   <img src="https://img.shields.io/badge/-VSCode-007ACC.svg?logo=visualstudiocode&style=flat">
-  <a href="https://twitter.com/NL4boratory" target="_blank">
-    <img alt="Twitter: N-LAB" src="https://img.shields.io/twitter/follow/NL4boratory.svg?style=social" />
-  </a>
-  <a href="https://github.com/N-Laboratory" target="_blank">
-    <img src="https://img.shields.io/badge/-FollowMyAccount-grey.svg?logo=github&style=flat">
-  </a>
 </p>
 <a href="https://github.com/N-Laboratory/nuxt3-starter-guide-example-jpn" target="_blank">
   日本語版はこちら
 </a>
 
+-------
+```bash
+npx degit idmytro/nuxt3-starter-guide-example#min mynuxtapp
+```
+-------
 
 This project is a template nuxt 3 project.
 
 The minimum required functions are implemented as a template project and the essentials are explained.
-This project also implement unit testing, E2E testing, and analyzing source code by SonarQube.
+This project also implement unit testing, E2E testing.
 
 This project implement the following.
 * TypeScript
@@ -39,7 +37,6 @@ This project implement the following.
 * Storybook
 * Vitest (unit test)
 * Puppeteer (E2E test)
-* SonarQube
 
 ## Contents
 
@@ -57,7 +54,6 @@ This project implement the following.
 1. [Data Fetching](#data-fetching)
 1. [Storybook Setup](#storybook-setup)
 1. [E2E Testing By Puppeteer](#e2e-testing-by-puppeteer)
-1. [Analyzing source code by SonarQube](#analyzing-source-code-by-sonarqube)
 
 ## Create [New Project](https://nuxt.com/docs/getting-started/installation#new-project)
 Run below command to create a new nuxt 3 project.
@@ -441,7 +437,7 @@ AutoImportFunctions({
 
 ### Collect coverage
 ```bash
-npm install --save-dev @vitest/coverage-v8 vitest-sonar-reporter
+npm install --save-dev @vitest/coverage-v8
 ```
 
 Add the following to vitest.config.ts.
@@ -456,7 +452,7 @@ export default defineConfig({
       reporter: ['html', 'clover', 'text']
     },
     root: '.',
-    reporters: ['verbose', 'vitest-sonar-reporter'],
+    reporters: ['verbose'],
     outputFile: 'test-report.xml'
   }
 });
@@ -1533,89 +1529,3 @@ npm run dev
 # run E2E testing
 npm run test:e2e
 ```
-
-## Analyzing source code by [SonarQube](https://docs.sonarqube.org/latest/)
-SonarQube is a self-managed, automatic code review tool that systematically helps you deliver clean code.
-```bash
-# install SonarQube tools
-npm install --save-dev sonarqube-scanner vitest-sonar-reporter
-```
-
-Add the following to vitest.config.ts.
-* add lcov to reporter
-* add reporters and outputFile to test
-```ts
-// vitest.config.ts
-export default defineConfig({
-  test: {
-    coverage: {
-      // Add lcov to collect coverage by SonarQube
-      reporter: ['html', 'clover', 'text', 'lcov']
-    },
-    // Add this to analyze your test code by SonarQube
-    reporters: ['verbose', 'vitest-sonar-reporter'],
-    outputFile: 'test-report.xml',
-  }
-})
-```
-
-Create sonar-project.properties in root directory and add the following to sonar-project.properties. See [this](https://docs.sonarqube.org/9.6/project-administration/narrowing-the-focus/) for more details.
-```properties
-sonar.projectKey=sample
-sonar.projectName=sample
-sonar.sources=src
-sonar.tests=src/tests/
-sonar.test.inclusions=src/tests/**/*.spec.ts
-sonar.exclusions=**/*plugins*/**, src/tests/**/*.spec.ts, src/tests/**/setup.ts
-sonar.testExecutionReportPaths=test-report.xml
-sonar.javascript.file.suffixes=.js,.jsx
-sonar.typescript.file.suffixes=.ts,.tsx,.vue
-sonar.typescript.lcov.reportPaths=coverage/lcov.info
-sonar.javascript.lcov.reportPaths=coverage/lcov.info
-sonar.host.url=http://localhost:9000
-sonar.token=sqp_XXXXXXXXXXXXXXXXXXXXXX
-```
-
-### Create a SonarQube project
-Make sure you have installed SonarQube (v10.7) on your development machine.
-Run SonarQube server as localhost:9000 before do the following.
-
-To create a SonarQube project, do the following.
-1. Access the following url.
-http://localhost:9000/projects/create
-
-1. Click [Create a local project]
-
-1. Input __sample__ in Project display name and Project key. Click [Next]
-
-1. Select [Use the global setting] and click [Create project]
-
-1. Click [Locally]
-
-1. Click [Generate] and then copy the generated project token
-
-### Analyze your source code
-Add project token to sonar.token in sonar-project.properties.
-See [this](https://docs.sonarqube.org/latest/user-guide/user-account/generating-and-using-tokens/) for more details of token.
-```properties
-sonar.token=sqp_XXXXXXXXXXXXXXXXXXXXXX
-```
-
-Add the following to scripts in package.json.
-```json
-{
-  "scripts": {
-    "sonar": "sonar-scanner"
-  },
-}
-```
-
-Run below command to run SonarQube analysis.
-```bash
-# run SonarQube analysis
-npm run sonar
-```
-
-You can access the following url to show result.
-
-http://localhost:9000/dashboard?id=nuxt3-starter-guide
