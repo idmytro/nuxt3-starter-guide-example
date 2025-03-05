@@ -22,6 +22,11 @@
   日本語版はこちら
 </a>
 
+-------
+```bash
+npx degit idmytro/nuxt3-starter-guide-example#min mynuxtapp
+```
+-------
 
 This project is a template nuxt 3 project.
 
