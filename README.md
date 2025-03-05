@@ -11,12 +11,6 @@
   <img src="https://img.shields.io/badge/-Mac-grey.svg?logo=macos&style=flat">
   <img src="https://img.shields.io/badge/-Linux-black.svg?logo=linux&style=flat">
   <img src="https://img.shields.io/badge/-VSCode-007ACC.svg?logo=visualstudiocode&style=flat">
-  <a href="https://twitter.com/NL4boratory" target="_blank">
-    <img alt="Twitter: N-LAB" src="https://img.shields.io/twitter/follow/NL4boratory.svg?style=social" />
-  </a>
-  <a href="https://github.com/N-Laboratory" target="_blank">
-    <img src="https://img.shields.io/badge/-FollowMyAccount-grey.svg?logo=github&style=flat">
-  </a>
 </p>
 <a href="https://github.com/N-Laboratory/nuxt3-starter-guide-example-jpn" target="_blank">
   日本語版はこちら
